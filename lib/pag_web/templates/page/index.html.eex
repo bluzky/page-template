@@ -1,0 +1,66 @@
+<header>
+  <%= component :header, get_item(@page["components"], "header"), fn props, fields, components -> %>
+    <section class="container">
+      <%= html_field(:header_menu, fields["header_menu"] || %{}) do  %>
+      <nav role="navigation">
+        <ul>
+          <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+          <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+            <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+          <% end %>
+        </ul>
+      </nav>
+      <% end %>
+      <a href="https://phoenixframework.org/" class="phx-logo">
+        <%= img_field :logo, fields["logo"], src: Routes.static_path(@conn, "/images/phoenix.png"), alt: "Phoenix framework" %>
+
+      </a>
+    </section>
+  <% end %>
+</header>
+<main role="main" class="container">
+  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+  <%= component :hero, get_item(@page["components"], "hero"), fn props, fields, _ -> %>
+    <section class="phx-hero">
+      <%= text_field :title, "welcome", fields["title"], tag: :h1 %>
+      <%= text_field :sub_title, "Hello again", fields["sub_title"] %>
+  </section>
+  <% end %>
+
+  <section class="row">
+    <article class="column">
+      <h2>Resources</h2>
+      <ul>
+        <li>
+          <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
+        </li>
+        <li>
+          <a href="https://github.com/phoenixframework/phoenix">Source</a>
+        </li>
+        <li>
+          <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
+        </li>
+      </ul>
+    </article>
+    <article class="column">
+      <h2>Help</h2>
+      <ul>
+        <li>
+          <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
+        </li>
+        <li>
+          <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
+        </li>
+        <li>
+          <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+</main>
